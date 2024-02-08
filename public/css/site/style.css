@@ -1,0 +1,16 @@
+.body-site{
+    background-color: var(--secondary);
+    background-image: url('../../img/site/cinema.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    color: var(--terciary);
+}
+
+/* Responsivo */
+@media screen and (max-width: 520px) {
+    .password-mobile{
+        margin-top: 1em;
+    }
+}

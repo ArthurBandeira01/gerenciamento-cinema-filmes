@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --primary: #db0000;
+    --secondary: #181717;
+    --terciary: #ffffff;
+    --quartenary: #564d4d;
+}
+
+.centraliza{
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+}
+
+.resetPasswordError{
+    text-align: left;
+    font-size: 14px; /* Tamanho da fonte */
+    margin-top: 5px;
+    color: rgb(107, 35, 35);
+}
