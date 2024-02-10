@@ -56,6 +56,6 @@ class UserTenantService
         }
         $this->userTenantRepository->destroyUserTenant($userTenant);
 
-        return response()->json(['message' => 'UserTenant Deleted'], 200);
+        return response()->json(['message' => 'Usuário deletado'], 200);
     }
 }

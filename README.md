@@ -12,6 +12,8 @@ simplificada.
 * Banco de dados: PostgreSQL
 ## Instalação e Documentação
 
+O projeto de gerenciamento de sistemas utiliza a arquitetura MVC e Repository Pattern seguindo as PSR's do PHP.
+
 A instalação foi feita utilizando instalador do laravel embutido com o seguinte comando:
 
 ```bash

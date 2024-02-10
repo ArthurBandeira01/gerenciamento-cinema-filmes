@@ -23,7 +23,6 @@ class DatabaseSeeder extends Seeder
             UserTenant::create([
                 'name' => 'Arthur Bandeira',
                 'email' => 'arthurbandeirafc@gmail.com',
-                'role' => 'super_admin',
                 'password' => bcrypt('secret123'),
             ]);
         });

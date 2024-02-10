@@ -39,6 +39,14 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
+        // Verifica se o login é de um tenant
+        if (tenant() !== null) {
+            if (Auth::guard('user_tenant')->attempt($credentials)) {
+                return redirect()->route('admin');
+            } else {
+                return redirect()->route('home')->with('error', 'Usuário e/ou senha incorreto(s), verifique as credenciais ou contate o administrador.');
+            }
+        }
         if (Auth::attempt($credentials)) {
             return redirect()->route('admin');
         } else {

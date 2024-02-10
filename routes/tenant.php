@@ -8,23 +8,11 @@ use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 use App\Http\Controllers\MovieTheaterController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\SiteController;
 use App\Http\Controllers\UserTenantController;
 
-
-/*
-|--------------------------------------------------------------------------
-| Tenant Routes
-|--------------------------------------------------------------------------
-|
-| Here you can register the tenant routes for your application.
-| These routes are loaded by the TenantRouteServiceProvider.
-|
-| Feel free to customize them however you want. Good luck!
-|
-*/
-
-Route::middleware(['web', InitializeTenancyByDomain::class, PreventAccessFromCentralDomains::class,])->group(function () {
-    Route::get('/', [TenantController::class, "index"])->name('tenantHome');
+Route::middleware(['web', 'global.variables', InitializeTenancyByDomain::class, PreventAccessFromCentralDomains::class])->group(function () {
+    Route::get('/', [SiteController::class, "index"])->name('index');
 
     //Usuarios tenant:
     Route::get('usuarios/index', [UserTenantController::class, "index"])->name('usersTenant');
@@ -53,3 +41,7 @@ Route::middleware(['web', InitializeTenancyByDomain::class, PreventAccessFromCen
     Route::put('room/{room}', [RoomController::class, "update"])->name('roomUpdate');
     Route::delete('room/{room}', [RoomController::class, "destroy"])->name('roomDestroy');
 });
+
+// Route::middleware(['web', InitializeTenancyByDomain::class, PreventAccessFromCentralDomains::class,])->group(function () {
+
+// });

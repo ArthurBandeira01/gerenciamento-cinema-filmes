@@ -20,44 +20,53 @@ class UserController extends Controller
 
     public function index()
     {
-        dd('aqui');
-        return view('admin.users.index');
+        $users = $this->userService->getAllUsers();
+
+        return view('admin.users.index', ['users' => $users]);
     }
 
     public function create()
     {
-        $data = [];
-
-        return view('admin.users.create', compact('data'));
+        return view('admin.users.create');
     }
 
     public function store(UserRequest $request)
     {
-        $user = $this->userService->makeUser($request->all());
+        $validatedData = $request->validated();
 
-        return redirect()->route('user.index')->with('success', 'Usuário cadastrado com sucesso!');
+        if ($validatedData) {
+            $user = $this->userService->makeUser($request->all());
+            return redirect()->route('users')->with('success', 'Usuário cadastrado com sucesso!');
+        } else {
+            return redirect()->back()->withErrors($request->errors())->withInput();
+        }
     }
 
     public function show($id)
     {
         $user = $this->userService->getUserById($id);
 
-        $data = [];
+        return view('admin.users.show', ['user' => $user]);
+    }
 
-        return view('admin.users.show', compact('data'));
+    public function edit($id)
+    {
+        $user = $this->userService->getUserById($id);
+
+        return view('admin.users.edit', ['user' => $user]);
     }
 
     public function update(UserRequest $request, $id)
     {
         $user = $this->userService->updateUser($id, $request->all());
 
-        return redirect()->route('user.index')->with('success', 'Usuário atualizado com sucesso!');
+        return redirect()->route('users')->with('success', 'Usuário atualizado com sucesso!');
     }
 
     public function destroy($id)
     {
         $user = $this->userService->destroyUser($id);
 
-        return redirect()->route('user.index')->with('success', 'Usuário excluído com sucesso!');
+        return redirect()->route('users')->with('success', 'Usuário excluído com sucesso!');
     }
 }

@@ -16,8 +16,7 @@ class UserTenant extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
-        'role',
+        'password'
     ];
 
     protected $hidden = [
@@ -29,4 +28,9 @@ class UserTenant extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
+    }
 }

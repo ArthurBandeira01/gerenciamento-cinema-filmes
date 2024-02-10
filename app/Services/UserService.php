@@ -26,9 +26,6 @@ class UserService
 
     public function makeUser(array $user)
     {
-        $user['url'] = Str::kebab($user['name']);
-        $user['uuid'] = Str::uuid();
-
         return $this->usersRepository->createUser($user);
     }
 
@@ -37,14 +34,12 @@ class UserService
         $users = $this->usersRepository->getUserById($id);
 
         if (!$users) {
-            return response()->json(['message' => 'User Not Found'], 404);
+            return response()->json(['message' => 'Usuário não encontrado'], 404);
         }
 
-        if ($user['name']) {
-            $user['url'] = Str::kebab($user['name']);
-        }
         $this->usersRepository->updateUser($users, $user);
-        return response()->json(['message' => 'User Updated'], 200);
+
+        return response()->json(['message' => 'Usuário atualizado'], 200);
     }
 
     public function destroyUser(int $id)
@@ -52,10 +47,11 @@ class UserService
         $users = $this->usersRepository->getUserById($id);
 
         if (!$users) {
-            return response()->json(['message' => 'User Not Found'], 404);
+            return response()->json(['message' => 'Usuário não encontrado'], 404);
         }
+
         $this->usersRepository->destroyUser($users);
 
-        return response()->json(['message' => 'User Deleted'], 200);
+        return response()->json(['message' => 'Usuário deletado'], 200);
     }
 }

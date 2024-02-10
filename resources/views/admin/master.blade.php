@@ -25,15 +25,20 @@
 
             <!-- Main Content -->
             <div class="flex w-full flex-1 flex-col overflow-y-auto">
-                @include('components.success')
-                @include('components.error')
-                @yield('content')
+                <div class="mt-5 text-center flex flex-col items-center justify-center">
+                    @include('components.success')
+                    @include('components.error')
+                    @yield('content')
+                </div>
+
             </div>
         </div>
 
-        @yield('scripts')
-        <script src="{{URL::asset('js/jquery.js')}}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+        <script src="{{ URL::asset('js/jquery.js') }}"></script>
+        <script src="{{ URL::asset('js/jquery.validate.min.js') }}"></script>
+        <script src="{{ URL::asset('js/messages_pt_BR.min.js') }}"></script>
         <script src="{{URL::asset('js/admin/functions.js')}}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        @yield('scripts')
     </body>
 </html>

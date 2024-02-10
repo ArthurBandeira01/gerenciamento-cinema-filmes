@@ -15,7 +15,7 @@ Route::post('/redefinir-senha', [LoginController::class, "changePassword"])->nam
 Route::post('/admin/logout', [LoginController::class, "logout"])->name('logout');
 
 //Rotas admin:
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth', 'global.variables'])->group(function(){
     Route::prefix('/admin/')->group(function () {
         Route::get('index', [AdminController::class, "index"])->name('admin');
 
@@ -29,7 +29,7 @@ Route::middleware(['auth'])->group(function(){
         Route::delete('user/{user}', [UserController::class, "destroy"])->name('usersDestroy');
 
         //Tenant raíz:
-        Route::get('tenant/index', [TenantController::class, "index"])->name('tenant');
+        Route::get('tenant/index', [TenantController::class, "index"])->name('tenants');
         Route::get('tenant/create', [TenantController::class, "create"])->name('tenantCreate');
         Route::post('tenant/store', [TenantController::class, "store"])->name('tenantStore');
         Route::post('tenant/{tenant}/show', [TenantController::class, "show"])->name('tenantShow');
