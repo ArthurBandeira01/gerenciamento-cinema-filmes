@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\User;
-use App\Models\UserTenant;
 use App\Models\Tenant;
 
 class DatabaseSeeder extends Seeder
@@ -20,8 +19,8 @@ class DatabaseSeeder extends Seeder
         $tenantCinemaNorte->domains()->create(['domain' => 'cinemaNorte.localhost']);
 
         Tenant::all()->runForEach(function () {
-            UserTenant::create([
-                'name' => 'Arthur Bandeira',
+            User::insert([
+                'name' => 'Arthur Bandeira tenant',
                 'email' => 'arthurbandeirafc@gmail.com',
                 'password' => bcrypt('secret123'),
             ]);
@@ -30,7 +29,7 @@ class DatabaseSeeder extends Seeder
         User::create([
             'name' => 'Arthur Bandeira',
             'email' => 'arthurbandeirafc@gmail.com',
-            'password' => bcrypt('secret123'),
+            'password' => bcrypt('123456'),
         ]);
     }
 }

@@ -21,22 +21,22 @@ class RoomRepository implements RoomRepositoryInterface
         return $this->entity->paginate();
     }
 
-    public function getRoomById(int $id): object
+    public function getRoomById($id)
     {
         return $this->entity->where('id', $id)->first();
     }
 
-    public function createRoom(array $room): object
+    public function createRoom($room)
     {
         return $this->entity->create($room);
     }
 
-    public function updateRoom(object $room, array $categorie): object
+    public function updateRoom($room, $categorie)
     {
         return $room->update($categorie);
     }
 
-    public function destroyRoom(object $room)
+    public function destroyRoom($room)
     {
         return $room->delete();
     }

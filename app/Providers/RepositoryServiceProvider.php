@@ -3,29 +3,24 @@
 namespace App\Providers;
 
 use App\Repositories\Contracts\{
-    MovieTheaterRepositoryInterface,
+    SessionRoomRepositoryInterface,
     RoomRepositoryInterface,
-    UserRepositoryInterface,
-    UserTenantRepositoryInterface,
+    UserRepositoryInterface
 };
 use App\Repositories\{
-    MovieTheaterRepository,
+    SessionRoomRepository,
     RoomRepository,
-    UserRepository,
-    UserTenantRepository
+    UserRepository
 };
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     */
     public function register(): void
     {
         $this->app->bind(
-            MovieTheaterRepositoryInterface::class,
-            MovieTheaterRepository::class,
+            SessionRoomRepositoryInterface::class,
+            SessionRoomRepository::class,
         );
 
         $this->app->bind(
@@ -37,16 +32,8 @@ class RepositoryServiceProvider extends ServiceProvider
             UserRepositoryInterface::class,
             UserRepository::class,
         );
-
-        $this->app->bind(
-            UserTenantRepositoryInterface::class,
-            UserTenantRepository::class,
-        );
     }
 
-    /**
-     * Bootstrap services.
-     */
     public function boot(): void
     {
 

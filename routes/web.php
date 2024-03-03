@@ -6,18 +6,20 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TenantController;
 
-Route::get('/', [LoginController::class, 'index'])->name('home');
-Route::post('/', [LoginController::class, 'login'])->name('login');
-Route::get('/esqueceu-senha', [LoginController::class, "rememberPassword"])->name('rememberPassword');
-Route::post('/esqueceu-senha', [LoginController::class, "tokenRememberPassword"])->name('tokenRememberPassword');
-Route::get('/redefinir-senha/{token?}', [LoginController::class, "resetPassword"])->name('resetPassword');
-Route::post('/redefinir-senha', [LoginController::class, "changePassword"])->name('changePassword');
-Route::post('/admin/logout', [LoginController::class, "logout"])->name('logout');
+Route::middleware(['global.variables'])->group(function(){
+    Route::get('/', [LoginController::class, 'index'])->name('home');
+    Route::post('/', [LoginController::class, 'login'])->name('login');
+    Route::get('/esqueceu-senha', [LoginController::class, "rememberPassword"])->name('rememberPassword');
+    Route::post('/esqueceu-senha', [LoginController::class, "tokenRememberPassword"])->name('tokenRememberPassword');
+    Route::get('/redefinir-senha/{token?}', [LoginController::class, "resetPassword"])->name('resetPassword');
+    Route::post('/redefinir-senha', [LoginController::class, "changePassword"])->name('changePassword');
+});
 
 //Rotas admin:
 Route::middleware(['auth', 'global.variables'])->group(function(){
     Route::prefix('/admin/')->group(function () {
         Route::get('index', [AdminController::class, "index"])->name('admin');
+        Route::post('logout', [LoginController::class, "logout"])->name('logout');
 
         //Usuarios:
         Route::get('users/index', [UserController::class, "index"])->name('users');

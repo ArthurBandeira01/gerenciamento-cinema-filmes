@@ -31,5 +31,5 @@
 </div>
 @endsection
 @section('scripts')
-    <script src="{{ URL::asset('js/admin/validate/tenantValidate.js') }}"></script>
+    <script src="{{ url('js/admin/validate/tenantValidate.js') }}"></script>
 @endsection

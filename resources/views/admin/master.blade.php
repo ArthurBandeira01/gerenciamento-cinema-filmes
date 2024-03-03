@@ -8,14 +8,14 @@
         <meta name="keywords" content="Cinema, filme, lançamento, ingressos, tickets">
         <meta name="description" content="@yield('description')">
         <meta name="subject" content="Jetmovie - o seu sistema de cinema definitivo">
-        <link rel="shortcut icon" type="image-x/png" href="{{ URL::asset('img/favicon.ico') }}">
+        <link rel="shortcut icon" type="image-x/png" href="{{ url('img/favicon.ico') }}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&display=swap" rel="stylesheet">
         <script src="https://kit.fontawesome.com/a7cf753026.js" crossorigin="anonymous"></script>
         <script src="https://cdn.tailwindcss.com"></script>
-        <link rel="stylesheet" href="{{URL::asset('css/global.css')}}">
-        <link rel="stylesheet" href="{{URL::asset('css/admin/style.css')}}">
+        <link rel="stylesheet" href="{{url('css/global.css')}}">
+        <link rel="stylesheet" href="{{url('css/admin/style.css')}}">
     </head>
     <body class="antialiased body-site text-center" id="app">
         @include('components.admin.painel.header')
@@ -34,10 +34,10 @@
             </div>
         </div>
 
-        <script src="{{ URL::asset('js/jquery.js') }}"></script>
-        <script src="{{ URL::asset('js/jquery.validate.min.js') }}"></script>
-        <script src="{{ URL::asset('js/messages_pt_BR.min.js') }}"></script>
-        <script src="{{URL::asset('js/admin/functions.js')}}"></script>
+        <script src="{{ url('js/jquery.js') }}"></script>
+        <script src="{{ url('js/jquery.validate.min.js') }}"></script>
+        <script src="{{ url('js/messages_pt_BR.min.js') }}"></script>
+        <script src="{{url('js/admin/functions.js')}}"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         @yield('scripts')
     </body>

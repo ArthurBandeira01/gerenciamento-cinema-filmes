@@ -16,10 +16,10 @@
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
         <script src="https://kit.fontawesome.com/a7cf753026.js" crossorigin="anonymous"></script>
         <script src="https://cdn.tailwindcss.com"></script>
-        <link rel="stylesheet" href="{{URL::asset('css/site/style.css')}}">
+        <link rel="stylesheet" href="{{ url('css/site/style.css')}}">
 
     </head>
     <body class="antialiased">
-
+        {{--  @dd(auth())  --}}
     </body>
 </html>

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Stancl\Tenancy\Database\Models\Tenant;
 use App\Models\Tenant as TenantModel;
-use App\Models\UserTenant;
 use Illuminate\Support\Facades\DB;
 
 class TenantController extends Controller

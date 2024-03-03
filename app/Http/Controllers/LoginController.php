@@ -6,51 +6,54 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use App\Mail\ResetPassword;
 use App\Models\PasswordReset;
 use App\Models\User;
-use App\Models\UserTenant;
 use App\Services\UserService;
-use App\Services\UserTenantService;
 
 class LoginController extends Controller
 {
-
     protected $userService;
-    protected $userTenantService;
     private $passwordReset;
 
-    public function __construct(
-        PasswordReset $passwordReset,
-        UserService $userService,
-        UserTenantService $userTenantService
-    ) {
+    public function __construct(PasswordReset $passwordReset, UserService $userService)
+    {
         $this->passwordReset = $passwordReset;
         $this->userService = $userService;
-        $this->userTenantService = $userTenantService;
     }
 
     public function index()
     {
+        if (Session::has('userAccessTenant')) {
+            return redirect()->route('adminTenant');
+        }
+
         return view('login');
     }
 
     public function login(Request $request)
     {
+        $inputs = $request->all();
         $credentials = $request->only('email', 'password');
 
-        // Verifica se o login é de um tenant
-        if (tenant() !== null) {
-            if (Auth::guard('user_tenant')->attempt($credentials)) {
-                return redirect()->route('admin');
-            } else {
-                return redirect()->route('home')->with('error', 'Usuário e/ou senha incorreto(s), verifique as credenciais ou contate o administrador.');
-            }
-        }
         if (Auth::attempt($credentials)) {
+            $user = User::where('email', $inputs['email'])->first();
+            if (tenant()) {
+                Session::put('userAccessTenant', $user->id);
+                return redirect()->route('adminTenant');
+            }
+
+            Auth::login($user);
             return redirect()->route('admin');
         } else {
-            return redirect()->route('home')->with('error', 'Usuário e/ou senha incorreto(s), verifique as credenciais ou contate o administrador.');
+            if (tenant()) {
+                return redirect()->route('homeTenant')
+                ->with('error', 'Usuário e/ou senha incorreto(s), verifique as credenciais.');
+            } else {
+                return redirect()->route('home')
+            ->with('error', 'Usuário e/ou senha incorreto(s), verifique as credenciais.');
+            }
         }
     }
 
@@ -66,13 +69,7 @@ class LoginController extends Controller
         //Geração de senha em forma de hash
         $randomValue = rand();
         $hash = hash('sha256', $randomValue);
-
-        if (tenant() !== null) {
-            $verificaEmail = UserTenant::where('email', $inputs['email'])->first();
-            dd($verificaEmail);
-        } else {
-            $verificaEmail = User::where('email', $inputs['email'])->first();
-        }
+        $verificaEmail = User::where('email', $inputs['email'])->first();
 
         if (isset($verificaEmail)) {
 
@@ -128,6 +125,11 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
+        if (tenant()) {
+            Session::forget('userAccessTenant');
+            return redirect()->route('loginTenant');
+        }
+
         Auth::logout();
 
         $request->session()->invalidate();
