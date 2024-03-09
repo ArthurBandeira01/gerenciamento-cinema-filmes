@@ -8,7 +8,7 @@ use App\Services\RoomService;
 use App\Http\Requests\RoomRequest;
 use App\Http\Resources\RoomResource;
 
-class RoomController extends Controller
+class RoomsController extends Controller
 {
     protected $roomService;
 

@@ -16,7 +16,7 @@ class RoomRepository implements RoomRepositoryInterface
         $this->entity = $room;
     }
 
-    public function getAllRooms(): array
+    public function getAllRooms()
     {
         return $this->entity->paginate();
     }

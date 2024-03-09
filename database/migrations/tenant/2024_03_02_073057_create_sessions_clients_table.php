@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('sessionRoomId');
             $table->foreign('sessionRoomId')->references('id')->on('sessions_rooms');
-            $table->integer('cpf', 11);
+            $table->bigInteger('cpf')->unique();
             $table->integer('numberSeat');
             $table->timestamps();
         });

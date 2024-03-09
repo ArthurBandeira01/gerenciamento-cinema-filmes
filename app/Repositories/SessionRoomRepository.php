@@ -25,12 +25,7 @@ class SessionRoomRepository implements SessionRoomRepositoryInterface
         return $this->entity->paginate();
     }
 
-    /**
-     * Seleciona a Categoria por ID
-     * @param int $id
-     * @return object
-     */
-    public function getSessionRoomById(int $id)
+    public function getSessionRoomById($id)
     {
         return $this->entity->where('id', $id)->first();
     }
@@ -40,7 +35,7 @@ class SessionRoomRepository implements SessionRoomRepositoryInterface
      * @param array $sessionRoom
      * @return object
      */
-    public function createSessionRoom(array $sessionRoom)
+    public function createSessionRoom($sessionRoom)
     {
         return $this->entity->create($sessionRoom);
     }
@@ -51,7 +46,7 @@ class SessionRoomRepository implements SessionRoomRepositoryInterface
      * @param array $categorie
      * @return object
      */
-    public function updateSessionRoom(object $sessionRoom, array $categorie)
+    public function updateSessionRoom($sessionRoom, $categorie)
     {
         return $sessionRoom->update($categorie);
     }
@@ -60,7 +55,7 @@ class SessionRoomRepository implements SessionRoomRepositoryInterface
      * Deleta uma categoria
      * @param object $sessionRoom
      */
-    public function destroySessionRoom(object $sessionRoom)
+    public function destroySessionRoom($sessionRoom)
     {
         return $sessionRoom->delete();
     }

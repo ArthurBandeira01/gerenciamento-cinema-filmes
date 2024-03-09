@@ -32,12 +32,12 @@
                     @endif
                     @if(isset($tenantVerify))
                     <li class="px-6 py-2 mt-5">
-                        <a href="" class="flex items-center text-gray-300 hover:text-red-700">
+                        <a href="{{route('rooms')}}" class="flex items-center text-gray-300 hover:text-red-700">
                             <i class="fas fa-door-closed mr-4"></i> Salas do Cinema
                         </a>
                     </li>
                     <li class="px-6 py-2 mt-5">
-                        <a href="" class="flex items-center text-gray-300 hover:text-red-700">
+                        <a href="{{route('sessionRoom')}}" class="flex items-center text-gray-300 hover:text-red-700">
                             <i class="fas fa-ticket-alt mr-4"></i> Sessões das Salas
                         </a>
                     </li>
