@@ -23,14 +23,14 @@
             <label for="room" class="block text-gray-700 text-sm font-bold mb-2 text-left">
                 Nome/número da sala
             </label>
-            <input type="text" id="room" value="{{$room->id}}" name="room"
+            <input type="text" id="room" value="{{$room->name}}" name="room"
             class="validate border rounded-lg px-3 py-2 w-full focus:outline-none focus:border-blue-500">
         </div>
         <div class="mb-4">
             <label for="numberSeats" class="block text-gray-700 text-sm font-bold mb-2 text-left">
                 Número de assentos
             </label>
-            <input type="number" id="numberSeats" name="numberSeats"
+            <input type="number" id="numberSeats" value="{{$room->seats}}" name="numberSeats"
             class="validate border rounded-lg px-3 py-2 w-full focus:outline-none focus:border-blue-500">
         </div>
         <div class="flex items-center justify-center">

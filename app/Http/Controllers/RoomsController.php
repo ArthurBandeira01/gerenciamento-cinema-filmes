@@ -31,7 +31,23 @@ class RoomsController extends Controller
 
     public function store(RoomRequest $request)
     {
-        $room = $this->roomService->makeRoom($request->all());
+        // $room = $this->roomService->makeRoom($request->all());
+        // $imagemRequest = $request->pathImagem;
+        // $pastaDestino = 'img/blog/';
+        // $nameFile = $imagemRequest->getClientOriginalName();
+        // $separaExtensao = explode('.', $nameFile);
+
+        // if($separaExtensao[1] !== 'webp'){
+        //     unset($separaExtensao[1]);
+        //     array_push($separaExtensao, 'webp');
+        //     $novaExtensao = implode('.', $separaExtensao);
+        // }else{
+        //     $novaExtensao = $nameFile;
+        // }
+
+        // $novoNome = $pastaDestino . $novaExtensao;
+        // $imagem = Image::make($request->pathImagem)->resize(400, 230);
+        // $imagem->save($novoNome);
 
         return redirect()->route('room.index')->with('success', 'Sala cadastrada com sucesso!');
     }
