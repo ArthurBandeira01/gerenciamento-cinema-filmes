@@ -14,17 +14,17 @@ class RoomService
         $this->roomRepository = $roomRepository;
     }
 
-    public function getAllRooms(): array
+    public function getAllRooms()
     {
         return $this->roomRepository->getAllRooms();
     }
 
-    public function getRoomById(int $id): object
+    public function getRoomById($id)
     {
         return $this->roomRepository->getRoomById($id);
     }
 
-    public function makeRoom(array $room): object
+    public function makeRoom($room)
     {
         $room['url'] = Str::kebab($room['name']);
         $room['uuid'] = Str::uuid();
@@ -32,22 +32,19 @@ class RoomService
         return $this->roomRepository->createRoom($room);
     }
 
-    public function updateRoom(int $id, array $room)
+    public function updateRoom($id, $room)
     {
-        $room = $this->roomRepository->getRoomById($id);
+        $rooms = $this->roomRepository->getRoomById($id);
 
-        if (!$room) {
+        if (!$rooms) {
             return response()->json(['message' => 'Room Not Found'], 404);
         }
 
-        if ($room['name']) {
-            $room['url'] = Str::kebab($room['name']);
-        }
-        $this->roomRepository->updateRoom($room, $room);
+        $this->roomRepository->updateRoom($rooms, $room);
         return response()->json(['message' => 'Room Updated'], 200);
     }
 
-    public function destroyRoom(int $id)
+    public function destroyRoom($id)
     {
         $room = $this->roomRepository->getRoomById($id);
 

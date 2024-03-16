@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RoomRequest extends FormRequest
+class SessionClientRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -14,16 +14,16 @@ class RoomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'seats' => 'required',
+            'cpf' => 'required',
+            'numberSeat' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'O nome da sala é obrigatório.',
-            'seats.required' => 'O número de assentos é obrigatório.',
+            'cpf.required' => 'O CPF é obrigatório.',
+            'numberSeat.required' => 'O número de assentos é obrigatório.',
         ];
     }
 }

@@ -10,7 +10,6 @@ use App\Http\Resources\UserResource;
 
 class UserController extends Controller
 {
-
     protected $userService;
 
     public function __construct(UserService $userService)
