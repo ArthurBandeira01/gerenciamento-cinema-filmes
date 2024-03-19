@@ -8,7 +8,8 @@ use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RoomsController;
-use App\Http\Controllers\SessionsRoomController;
+use App\Http\Controllers\SessionsRoomsController;
+use App\Http\Controllers\SessionsClientsController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\UserController;
 use Illuminate\Session\Middleware\StartSession;
@@ -36,31 +37,39 @@ Route::middleware(['web', 'userAccessTenant', 'global.variables',
         Route::get('usuarios/index', [UserController::class, "index"])->name('usersTenant');
         Route::get('usuario/create', [UserController::class, "create"])->name('usersTenantCreate');
         Route::post('usuario/store', [UserController::class, "store"])->name('usersTenantStore');
-        Route::post('usuario/{user}/show', [UserController::class, "show"])->name('usersTenantShow');
         Route::get('usuario/{user}/edit', [UserController::class, "edit"])->name('usersTenantEdit');
         Route::put('usuario/{user}', [UserController::class, "update"])->name('usersTenantUpdate');
         Route::delete('usuario/{user}', [UserController::class, "destroy"])->name('usersTenantDestroy');
-
-        //Cinemas:
-        Route::get('sessoes-de-filmes/index', [SessionsRoomController::class, "index"])->name('sessionRoom');
-        Route::get('sessoes-de-filmes/create', [SessionsRoomController::class, "create"])->name('sessionRoomCreate');
-        Route::post('sessoes-de-filmes/store', [SessionsRoomController::class, "store"])->name('sessionRoomStore');
-        Route::post('sessoes-de-filmes/{sessionRoom}/show', [SessionsRoomController::class, "show"])
-        ->name('sessionRoomShow');
-        Route::get('sessoes-de-filmes/{sessionRoom}/edit', [SessionsRoomController::class, "edit"])
-        ->name('sessionRoomEdit');
-        Route::put('sessoes-de-filmes/{sessionRoom}', [SessionsRoomController::class, "update"])
-        ->name('sessionRoomUpdate');
-        Route::delete('sessoes-de-filmes/{sessionRoom}', [SessionsRoomController::class, "destroy"])
-        ->name('sessionRoomDestroy');
 
         //Salas:
         Route::get('rooms/index', [RoomsController::class, "index"])->name('rooms');
         Route::get('room/create', [RoomsController::class, "create"])->name('roomCreate');
         Route::post('room/store', [RoomsController::class, "store"])->name('roomStore');
-        Route::post('room/{room}/show', [RoomsController::class, "show"])->name('roomShow');
         Route::get('room/{room}/edit', [RoomsController::class, "edit"])->name('roomEdit');
         Route::put('room/{room}', [RoomsController::class, "update"])->name('roomUpdate');
         Route::delete('room/{room}', [RoomsController::class, "destroy"])->name('roomDestroy');
+
+        //Salas de sessões:
+        Route::get('sessoes-de-filmes/index', [SessionsRoomsController::class, "index"])->name('sessionRoom');
+        Route::get('sessoes-de-filmes/create', [SessionsRoomsController::class, "create"])->name('sessionRoomCreate');
+        Route::post('sessoes-de-filmes/store', [SessionsRoomsController::class, "store"])->name('sessionRoomStore');
+        Route::get('sessoes-de-filmes/{sessionRoom}/edit', [SessionsRoomsController::class, "edit"])
+        ->name('sessionRoomEdit');
+        Route::put('sessoes-de-filmes/{sessionRoom}', [SessionsRoomsController::class, "update"])
+        ->name('sessionRoomUpdate');
+        Route::delete('sessoes-de-filmes/{sessionRoom}', [SessionsRoomsController::class, "destroy"])
+        ->name('sessionRoomDestroy');
+
+        //Clientes da sessão:
+        Route::get('cliente-de-sessao/index', [SessionsClientsController::class, "index"])->name('sessionClient');
+        Route::get('cliente-de-sessao/create', [SessionsClientsController::class, "create"])
+        ->name('sessionClientCreate');
+        Route::post('cliente-de-sessao/store', [SessionsClientsController::class, "store"])->name('sessionClientStore');
+        Route::get('cliente-de-sessao/{sessionRoom}/edit', [SessionsClientsController::class, "edit"])
+        ->name('sessionClientEdit');
+        Route::put('cliente-de-sessao/{sessionRoom}', [SessionsClientsController::class, "update"])
+        ->name('sessionRoomUpdate');
+        Route::delete('cliente-de-sessao/{sessionRoom}', [SessionsClientsController::class, "destroy"])
+        ->name('sessionClientDestroy');
     });
 });

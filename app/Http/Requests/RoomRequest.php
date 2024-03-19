@@ -13,10 +13,18 @@ class RoomRequest extends FormRequest
 
     public function rules(): array
     {
-        return [
-            'name' => 'required',
-            'seats' => 'required',
-        ];
+        if ($this->isMethod('post')) {
+            return [
+                'name' => 'required',
+                'seats' => 'required',
+            ];
+        }
+
+        if ($this->isMethod('put')) {
+            return [
+                'name' => 'required'
+            ];
+        }
     }
 
     public function messages()

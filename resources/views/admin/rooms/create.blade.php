@@ -8,7 +8,7 @@
 <h2 class="text-2xl text-center"><i class="fas fa-user"></i> Adicionar Sala</h2>
 <div class="main-content mt-5">
     @if ($errors->any())
-    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center" role="alert">
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center mb-4" role="alert">
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -19,17 +19,17 @@
     <form action="{{ route('roomStore') }}" method="post" id="roomForm">
         @csrf
         <div class="mb-4">
-            <label for="room" class="block text-gray-700 text-sm font-bold mb-2 text-left">
+            <label for="name" class="block text-gray-700 text-sm font-bold mb-2 text-left">
                 Nome/número da Sala
             </label>
-            <input type="text" id="room" name="room"
+            <input type="text" id="name" name="name"
             class="validate border rounded-lg px-3 py-2 w-full focus:outline-none focus:border-blue-500">
         </div>
         <div class="mb-4">
-            <label for="numberSeats" class="block text-gray-700 text-sm font-bold mb-2 text-left">
+            <label for="seats" class="block text-gray-700 text-sm font-bold mb-2 text-left">
                 Número de assentos
             </label>
-            <input type="number" id="numberSeats" name="numberSeats"
+            <input type="number" id="seats" name="seats"
             class="validate border rounded-lg px-3 py-2 w-full focus:outline-none focus:border-blue-500">
         </div>
         <div class="flex items-center justify-center">

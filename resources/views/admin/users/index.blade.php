@@ -24,16 +24,22 @@
                         <td class="px-6 py-2 font-bold">{{ $user->id }}</td>
                         <td class="px-6 py-2">{{ $user->name }}</td>
                         <td class="flex justify-center px-6 py-2">
-                            <button onclick="listUser('{{ $user->name }}', '{{ $user->email }}')" class="p-2 rounded bg-yellow-500 hover:bg-yellow-800 text-white transition-colors duration-300">
+                            <button onclick="listUser('{{ $user->name }}', '{{ $user->email }}')"
+                                 class="p-2 rounded bg-yellow-500 hover:bg-yellow-800 text-white
+                                        transition-colors duration-300">
                                 <i class="far fa-eye"></i>
                             </button>
-                            <a href="{{route('usersEdit', ['user' => $user->id])}}" class="p-2 ml-2 rounded bg-blue-500 hover:bg-blue-800 text-white transition-colors duration-300">
+                            <a href="{{route('usersEdit', ['user' => $user->id])}}"
+                                class="p-2 ml-2 rounded bg-blue-500 hover:bg-blue-800 text-white
+                                        transition-colors duration-300">
                                 <i class="fas fa-user-edit"></i>
                             </a>
-                            <form class="ml-2" action="{{ route('usersDestroy', ['user' => $user->id]) }}" method="POST" onsubmit="return confirm('Tem certeza?')">
+                            <form class="ml-2" action="{{ route('usersDestroy', ['user' => $user->id]) }}" method="POST"
+                                onsubmit="return confirm('Tem certeza?')">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="bg-red-500 hover:bg-red-800 text-white p-2 rounded transition-colors duration-300">
+                                <button type="submit" class="bg-red-500 hover:bg-red-800 text-white p-2
+                                rounded transition-colors duration-300">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             </form>

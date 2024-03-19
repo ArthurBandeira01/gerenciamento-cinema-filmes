@@ -16,21 +16,21 @@
         </ul>
     </div>
     @endif
-    <form action="{{ route('roomUpdate', ['id' => $room->id]) }}" method="post" id="roomForm">
+    <form action="{{ route('roomUpdate', ['room' => $room->id]) }}" method="post" id="roomForm">
         @csrf
         @method('PUT')
         <div class="mb-4">
-            <label for="room" class="block text-gray-700 text-sm font-bold mb-2 text-left">
+            <label for="name" class="block text-gray-700 text-sm font-bold mb-2 text-left">
                 Nome/número da sala
             </label>
-            <input type="text" id="room" value="{{$room->name}}" name="room"
+            <input type="text" id="name" value="{{$room->name}}" name="name"
             class="validate border rounded-lg px-3 py-2 w-full focus:outline-none focus:border-blue-500">
         </div>
         <div class="mb-4">
-            <label for="numberSeats" class="block text-gray-700 text-sm font-bold mb-2 text-left">
+            <label for="seats" class="block text-gray-700 text-sm font-bold mb-2 text-left">
                 Número de assentos
             </label>
-            <input type="number" id="numberSeats" value="{{$room->seats}}" name="numberSeats"
+            <input type="number" disabled id="seats" value="{{$room->seats}}" name="seats"
             class="validate border rounded-lg px-3 py-2 w-full focus:outline-none focus:border-blue-500">
         </div>
         <div class="flex items-center justify-center">

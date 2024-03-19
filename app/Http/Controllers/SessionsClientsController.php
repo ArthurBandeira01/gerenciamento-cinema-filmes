@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Room;
-use App\Services\RoomService;
-use App\Http\Requests\RoomRequest;
+use App\Services\SessionClientRoomService;
+use App\Http\Requests\SessionClientRequestRequest;
 use App\Http\Resources\RoomResource;
 
-class RoomsController extends Controller
+class SessionsClientsController extends Controller
 {
     protected $roomService;
 
@@ -50,9 +50,10 @@ class RoomsController extends Controller
         return view('admin.rooms.edit', ['room' => $room]);
     }
 
-    public function update(Request $request, $id)
+    public function update(RoomRequest $request, $id)
     {
         $this->roomService->updateRoom($id, $request->all());
+
         return redirect()->route('rooms')->with('success', 'Sala atualizada com sucesso!');
     }
 

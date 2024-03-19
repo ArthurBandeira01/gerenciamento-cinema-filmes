@@ -24,11 +24,8 @@ class RoomService
         return $this->roomRepository->getRoomById($id);
     }
 
-    public function makeRoom($room)
+    public function makeRoom(array $room)
     {
-        $room['url'] = Str::kebab($room['name']);
-        $room['uuid'] = Str::uuid();
-
         return $this->roomRepository->createRoom($room);
     }
 

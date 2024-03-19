@@ -41,13 +41,6 @@ class UserController extends Controller
         }
     }
 
-    public function show($id)
-    {
-        $user = $this->userService->getUserById($id);
-
-        return view('admin.users.show', ['user' => $user]);
-    }
-
     public function edit($id)
     {
         $user = $this->userService->getUserById($id);
@@ -57,14 +50,14 @@ class UserController extends Controller
 
     public function update(UserRequest $request, $id)
     {
-        $user = $this->userService->updateUser($id, $request->all());
+        $this->userService->updateUser($id, $request->all());
 
         return redirect()->route('users')->with('success', 'Usuário atualizado com sucesso!');
     }
 
     public function destroy($id)
     {
-        $user = $this->userService->destroyUser($id);
+        $this->userService->destroyUser($id);
 
         return redirect()->route('users')->with('success', 'Usuário excluído com sucesso!');
     }

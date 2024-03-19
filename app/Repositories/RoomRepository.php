@@ -26,7 +26,7 @@ class RoomRepository implements RoomRepositoryInterface
         return $this->entity->where('id', $id)->first();
     }
 
-    public function createRoom($room)
+    public function createRoom(array $room): object
     {
         return $this->entity->create($room);
     }
