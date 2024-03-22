@@ -34,8 +34,13 @@ class UserController extends Controller
         $validatedData = $request->validated();
 
         if ($validatedData) {
-            $user = $this->userService->makeUser($request->all());
-            return redirect()->route('users')->with('success', 'Usuário cadastrado com sucesso!');
+            $this->userService->makeUser($request->all());
+
+            if (tenant()) {
+                return redirect()->route('usersTenant')->with('success', 'Usuário cadastrado com sucesso!');
+            } else {
+                return redirect()->route('users')->with('success', 'Usuário cadastrado com sucesso!');
+            }
         } else {
             return redirect()->back()->withErrors($request->errors())->withInput();
         }
@@ -52,13 +57,21 @@ class UserController extends Controller
     {
         $this->userService->updateUser($id, $request->all());
 
-        return redirect()->route('users')->with('success', 'Usuário atualizado com sucesso!');
+        if (tenant()) {
+            return redirect()->route('usersTenant')->with('success', 'Usuário atualizado com sucesso!');
+        } else {
+            return redirect()->route('users')->with('success', 'Usuário atualizado com sucesso!');
+        }
     }
 
     public function destroy($id)
     {
         $this->userService->destroyUser($id);
 
-        return redirect()->route('users')->with('success', 'Usuário excluído com sucesso!');
+        if (tenant()) {
+            return redirect()->route('usersTenant')->with('success', 'Usuário excluído com sucesso!');
+        } else {
+            return redirect()->route('users')->with('success', 'Usuário excluído com sucesso!');
+        }
     }
 }
