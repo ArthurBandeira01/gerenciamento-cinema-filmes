@@ -11,7 +11,8 @@
         <link rel="shortcut icon" type="image-x/png" href="{{ url('img/favicon.ico') }}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&display=swap"
+        rel="stylesheet">
         <script src="https://kit.fontawesome.com/a7cf753026.js" crossorigin="anonymous"></script>
         <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" href="{{url('css/global.css')}}">
@@ -39,6 +40,8 @@
         <script src="{{ url('js/messages_pt_BR.min.js') }}"></script>
         <script src="{{url('js/admin/functions.js')}}"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
+        <script src="{{ url('js/mascaras.js') }}"></script>
         @yield('scripts')
     </body>
 </html>

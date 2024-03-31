@@ -1,13 +1,13 @@
 $(document).ready(function () {
-    $("#userForm").validate({
+    $("#sessionRoomForm").validate({
         rules: {
+            room: {
+                required: true,
+            },
             movie: {
                 required: true,
             },
             movieImage: {
-                required: true,
-            },
-            numberSeats: {
                 required: true,
             },
             priceTicket: {
@@ -21,14 +21,14 @@ $(document).ready(function () {
             },
         },
         messages: {
+            room: {
+                required: "Informe a sala do filme.",
+            },
             movie: {
                 required: "Informe o nome do filme.",
             },
             movieImage: {
                 required: "A imagem do filme é requerida.",
-            },
-            numberSeats: {
-                required: "Informe o número de assentos.",
             },
             priceTicket: {
                 required: "Informe o valor do ingresso.",

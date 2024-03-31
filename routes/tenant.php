@@ -42,12 +42,12 @@ Route::middleware(['web', 'userAccessTenant', 'global.variables',
         Route::delete('usuario/{user}', [UserController::class, "destroy"])->name('usersTenantDestroy');
 
         //Salas:
-        Route::get('rooms/index', [RoomsController::class, "index"])->name('rooms');
-        Route::get('room/create', [RoomsController::class, "create"])->name('roomCreate');
-        Route::post('room/store', [RoomsController::class, "store"])->name('roomStore');
-        Route::get('room/{room}/edit', [RoomsController::class, "edit"])->name('roomEdit');
-        Route::put('room/{room}', [RoomsController::class, "update"])->name('roomUpdate');
-        Route::delete('room/{room}', [RoomsController::class, "destroy"])->name('roomDestroy');
+        Route::get('salas/index', [RoomsController::class, "index"])->name('rooms');
+        Route::get('sala/create', [RoomsController::class, "create"])->name('roomCreate');
+        Route::post('sala/store', [RoomsController::class, "store"])->name('roomStore');
+        Route::get('sala/{room}/edit', [RoomsController::class, "edit"])->name('roomEdit');
+        Route::put('sala/{room}', [RoomsController::class, "update"])->name('roomUpdate');
+        Route::delete('sala/{room}', [RoomsController::class, "destroy"])->name('roomDestroy');
 
         //Salas de sessões:
         Route::get('sessoes-de-filmes/index', [SessionsRoomsController::class, "index"])->name('sessionRoom');

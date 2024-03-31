@@ -4,7 +4,7 @@
     <div class="flex justify-center items-center">
         <h2 class="text-center text-black-500"><i class="fas fa-tenants"></i> Listar Sessões</h2>
         <h2 class="title text-center ml-4">
-            <a class="rounded p-1 bg-green-500 hover:bg-green-800 text-white" href="{{ route('Create') }}">
+            <a class="rounded p-1 bg-green-500 hover:bg-green-800 text-white" href="{{ route('sessionRoomCreate') }}">
                 <i class="fas fa-plus-circle"></i> Adicionar Sessão
             </a>
         </h2>
@@ -13,7 +13,9 @@
         <table class="table-auto mt-8" aria-describedby="Sessões">
             <thead>
                 <tr>
-                    <th class="px-4 py-2" scope="col">Sessões</th>
+                    <th class="px-4 py-2" scope="col">ID</th>
+                    <th class="px-4 py-2" scope="col">Filme</th>
+                    <th class="px-4 py-2" scope="col">Horário</th>
                     <th class="px-4 py-2" scope="col" colspan="3">Ações</th>
                 </tr>
             </thead>
@@ -21,17 +23,20 @@
                 @foreach ($sessionsRooms as $sessionRoom)
                     <tr class="divide-x divide-gray-200">
                         <td class="px-6 py-2">{{ $sessionRoom->id }}</td>
+                        <td class="px-6 py-2">{{ $sessionRoom->movie }}</td>
+                        <td class="px-6 py-2">{{ FunctionsHelper::timeToBrazil($sessionRoom->time) }}</td>
                         <td class="flex justify-center px-6 py-2">
                             <button onclick="listSessionRoom('{{ $sessionRoom->id }}')" class="p-2 rounded bg-yellow-500
                                 hover:bg-yellow-800 text-white transition-colors duration-300">
                                 <i class="far fa-eye"></i>
                             </button>
-                            <a href="{{route('sessionRoomEdit', ['id' => $sessionRoom->id])}}" class="p-2 ml-2 rounded
-                                bg-blue-500 hover:bg-blue-800 text-white transition-colors duration-300">
+                            <a href="{{route('sessionRoomEdit', ['sessionRoom' => $sessionRoom->id])}}"
+                                class="p-2 ml-2 rounded bg-blue-500 hover:bg-blue-800 text-white
+                                 transition-colors duration-300">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
-                            <form class="ml-2" action="{{ route('sessionRoomDestroy', ['id' => $room->id]) }}"
-                                method="POST" onsubmit="return confirm('Tem certeza?')">
+                            <form action="{{ route('sessionRoomDestroy', ['sessionRoom' => $sessionRoom->id]) }}"
+                                method="POST" onsubmit="return confirm('Tem certeza?')" class="ml-2">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="bg-red-500 hover:bg-red-800 text-white p-2 rounded

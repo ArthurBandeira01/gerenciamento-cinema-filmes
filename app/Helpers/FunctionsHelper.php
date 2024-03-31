@@ -8,4 +8,9 @@ class FunctionsHelper
     {
         return strtoupper($string);
     }
+
+    public static function timeToBrazil(string $time)
+    {
+        return date("H:i", strtotime($time)); // Saída: 00:00
+    }
 }

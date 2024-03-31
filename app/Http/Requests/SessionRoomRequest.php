@@ -16,7 +16,6 @@ class SessionRoomRequest extends FormRequest
         return [
             'movie' => 'required',
             'movieImage' => 'required',
-            'numberSeats' => 'required',
             'priceTicket' => 'required',
             'sessionDate' => 'required',
             'sessionTime' => 'required',
@@ -28,7 +27,6 @@ class SessionRoomRequest extends FormRequest
         return [
             'movie.required' => 'O nome da sala é obrigatório.',
             'movieImage.required' => 'A imagem do filme é obrigatório.',
-            'numberSeats.required' => 'O número de assentos é obrigatório.',
             'priceTicket.required' => 'O valor do ingresso é obrigatório.',
             'sessionDate.required' => 'A data da sessão é obrigatória.',
             'sessionTime.required' => 'O horário da sessão é obrigatório.',

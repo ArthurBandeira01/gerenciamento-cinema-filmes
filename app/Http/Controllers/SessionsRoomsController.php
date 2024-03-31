@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SessionRoom;
+use App\Services\RoomService;
 use App\Services\SessionRoomService;
 use App\Http\Requests\SessionRoomRequest;
 use App\Http\Resources\SessionRoomResource;
@@ -11,28 +12,32 @@ use App\Http\Resources\SessionRoomResource;
 class SessionsRoomsController extends Controller
 {
     protected $sessionRoomService;
+    protected $roomService;
 
-    public function __construct(SessionRoomService $sessionRoomService)
+    public function __construct(SessionRoomService $sessionRoomService, RoomService $roomService)
     {
+        $this->roomService = $roomService;
         $this->sessionRoomService = $sessionRoomService;
     }
 
     public function index()
     {
-        $rooms = $this->sessionRoomService->getAllSessionRooms();
+        $sessionsRooms = $this->sessionRoomService->getAllSessionRooms();
 
-        return view('admin.rooms.index', ['rooms' => $rooms]);
+        return view('admin.sessionsRooms.index', ['sessionsRooms' => $sessionsRooms]);
     }
 
     public function create()
     {
-        $data = [];
+        $rooms = $this->roomService->getAllRooms();
 
-        return view('admin.rooms.create', compact('data'));
+        return view('admin.sessionsRooms.create', ['rooms' => $rooms]);
     }
 
-    public function store(RoomRequest $request)
+    public function store(SessionRoomRequest $request)
     {
+        $inputs = $request->all();
+        dd($inputs);
         $validatedData = $request->validated();
 
         if ($validatedData) {
@@ -45,9 +50,13 @@ class SessionsRoomsController extends Controller
 
     public function edit($id)
     {
-        $room = $this->roomService->getRoomById($id);
-
-        return view('admin.rooms.edit', ['room' => $room]);
+        $rooms = $this->roomService->getAllRooms();
+        $sessionRoom = $this->sessionRoomService->getSessionRoomById($id);
+        $data = [
+            'rooms' => $rooms,
+            'sessionRoom' => $sessionRoom,
+        ];
+        return view('admin.sessionsRooms.edit', ['data' => $data]);
     }
 
     public function update(RoomRequest $request, $id)
