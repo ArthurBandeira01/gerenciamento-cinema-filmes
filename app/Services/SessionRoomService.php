@@ -29,7 +29,7 @@ class SessionRoomService
         return $this->sessionRoomRepository->createSessionRoom($sessionRoom);
     }
 
-    public function updateRoom($id, $sessionRoom)
+    public function updateSessionRoom($id, $sessionRoom)
     {
         $sessionRooms = $this->sessionRoomRepository->getSessionRoomById($id);
 

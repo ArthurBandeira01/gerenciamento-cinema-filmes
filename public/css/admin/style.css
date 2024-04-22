@@ -6,6 +6,15 @@
     width: 0;
 }
 
+.session-on, .session-off {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}
+
+.session-on {background-color: green;}
+.session-off {background-color: red;}
+
 /* Responsivo */
 @media screen and (max-width: 992px){
     #sidebar{

@@ -15,7 +15,10 @@
                 <tr>
                     <th class="px-4 py-2" scope="col">ID</th>
                     <th class="px-4 py-2" scope="col">Filme</th>
-                    <th class="px-4 py-2" scope="col">Horário</th>
+                    <th class="px-4 py-2" scope="col">Ingresso (R$)</th>
+                    <th class="px-4 py-2" scope="col">Assentos</th>
+                    <th class="px-4 py-2" scope="col">Data/Horário</th>
+                    <th class="px-4 py-2" scope="col">Status</th>
                     <th class="px-4 py-2" scope="col" colspan="3">Ações</th>
                 </tr>
             </thead>
@@ -24,10 +27,23 @@
                     <tr class="divide-x divide-gray-200">
                         <td class="px-6 py-2">{{ $sessionRoom->id }}</td>
                         <td class="px-6 py-2">{{ $sessionRoom->movie }}</td>
-                        <td class="px-6 py-2">{{ FunctionsHelper::timeToBrazil($sessionRoom->time) }}</td>
+                        <td class="px-6 py-2">
+                            {{ FunctionsHelper::formatDecimalSqlToCurrencyBr($sessionRoom->priceTicket) }}
+                        </td>
+                        <td class="px-6 py-2">{{ $sessionRoom->numberSeats }}</td>
+                        <td class="px-6 py-2">
+                            {{ FunctionsHelper::formatDateSqlToBr($sessionRoom->sessionDate) }}
+                            {{ FunctionsHelper::timeToBrazil($sessionRoom->sessionTime) }}
+                        </td>
+                        @if($sessionRoom->status) <td class="px-6 py-2 text-green-500"> On
+                        @else <td class="px-6 py-2 text-red-500"> Off
+                        @endif
+                        </td>
                         <td class="flex justify-center px-6 py-2">
-                            <button onclick="listSessionRoom('{{ $sessionRoom->id }}')" class="p-2 rounded bg-yellow-500
-                                hover:bg-yellow-800 text-white transition-colors duration-300">
+                            <button
+                                onclick="listSessionRoom('{{ $sessionRoom->room->name }}', '{{ $sessionRoom->movie }}')"
+                                class="p-2 rounded bg-yellow-500 hover:bg-yellow-800 text-white
+                                transition-colors duration-300">
                                 <i class="far fa-eye"></i>
                             </button>
                             <a href="{{route('sessionRoomEdit', ['sessionRoom' => $sessionRoom->id])}}"
@@ -52,9 +68,10 @@
 @endsection
 @section('scripts')
 <script>
-    function listSessionRoom(name) {
+    function listSessionRoom(name, movie) {
         Swal.fire({
             title: name,
+            text: movie,
             icon: 'info',
             showCancelButton: false,
             showCloseButton: true,

@@ -17,19 +17,19 @@ class SessionRoomRequest extends FormRequest
             'movie' => 'required',
             'movieImage' => 'required',
             'priceTicket' => 'required',
-            'sessionDate' => 'required',
             'sessionTime' => 'required',
+            'status' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'movie.required' => 'O nome da sala é obrigatório.',
+            'movie.required' => 'O nome do filme é obrigatório.',
             'movieImage.required' => 'A imagem do filme é obrigatório.',
             'priceTicket.required' => 'O valor do ingresso é obrigatório.',
-            'sessionDate.required' => 'A data da sessão é obrigatória.',
             'sessionTime.required' => 'O horário da sessão é obrigatório.',
+            'status.required' => 'O status é obrigatório.',
         ];
     }
 }

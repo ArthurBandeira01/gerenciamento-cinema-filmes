@@ -17,7 +17,7 @@ use Illuminate\Session\Middleware\StartSession;
 
 Route::middleware(['web', 'global.variables', InitializeTenancyByDomain::class,
 PreventAccessFromCentralDomains::class])->group(function () {
-    Route::get('/inicio', [SiteController::class, "index"])->name('index');
+    Route::get('/', [SiteController::class, "index"])->name('index');
     Route::get('/admin', [LoginController::class, 'index'])->name('homeTenant');
     Route::post('/admin', [LoginController::class, 'login'])->name('loginTenant');
     Route::get('/esqueceu-senha', [LoginController::class, "rememberPassword"])->name('rememberPasswordTenant');
@@ -68,7 +68,7 @@ Route::middleware(['web', 'userAccessTenant', 'global.variables',
         Route::get('cliente-de-sessao/{sessionRoom}/edit', [SessionsClientsController::class, "edit"])
         ->name('sessionClientEdit');
         Route::put('cliente-de-sessao/{sessionRoom}', [SessionsClientsController::class, "update"])
-        ->name('sessionRoomUpdate');
+        ->name('sessionClientUpdate');
         Route::delete('cliente-de-sessao/{sessionRoom}', [SessionsClientsController::class, "destroy"])
         ->name('sessionClientDestroy');
     });

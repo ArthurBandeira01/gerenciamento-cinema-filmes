@@ -1,4 +1,4 @@
-<aside class="flex min-h-full w-64 bg-gray-900 text-white rounded" id="sidebar">
+<aside class="flex min-h-full w-64 bg-gray-900 text-white rounded z-10 hidden" id="sidebar">
     <div class="flex flex-col justify-between py-8">
         <div>
             <div class="px-6">

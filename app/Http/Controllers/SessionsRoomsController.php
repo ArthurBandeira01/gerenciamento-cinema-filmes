@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\SessionRoom;
 use App\Services\RoomService;
 use App\Services\SessionRoomService;
 use App\Http\Requests\SessionRoomRequest;
+use App\Helpers\FunctionsHelper;
 use App\Http\Resources\SessionRoomResource;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class SessionsRoomsController extends Controller
 {
@@ -16,8 +17,8 @@ class SessionsRoomsController extends Controller
 
     public function __construct(SessionRoomService $sessionRoomService, RoomService $roomService)
     {
-        $this->roomService = $roomService;
         $this->sessionRoomService = $sessionRoomService;
+        $this->roomService = $roomService;
     }
 
     public function index()
@@ -37,39 +38,77 @@ class SessionsRoomsController extends Controller
     public function store(SessionRoomRequest $request)
     {
         $inputs = $request->all();
-        dd($inputs);
         $validatedData = $request->validated();
-
+        $sanitizeRequest = $this->sanitizeRequest($inputs, $request->file('movieImage'));
+        $room = $this->roomService->getRoomById($inputs['roomId']);
+        $sanitizeRequest['numberSeats'] = $room->seats;
         if ($validatedData) {
-            $this->roomService->makeRoom($request->all());
-            return redirect()->route('rooms')->with('success', 'Sala cadastrada com sucesso!');
-        } else {
-            return redirect()->back()->withErrors($request->errors())->withInput();
+            $this->sessionRoomService->makeSessionRoom($sanitizeRequest);
+            return redirect()->route('sessionRoom')->with('success', 'Sessão da sala cadastrada com sucesso!');
         }
+
+        return redirect()->back()->withErrors($request->errors())->withInput();
     }
 
     public function edit($id)
     {
         $rooms = $this->roomService->getAllRooms();
         $sessionRoom = $this->sessionRoomService->getSessionRoomById($id);
-        $data = [
-            'rooms' => $rooms,
-            'sessionRoom' => $sessionRoom,
-        ];
-        return view('admin.sessionsRooms.edit', ['data' => $data]);
+        return view('admin.sessionsRooms.edit', ['rooms' => $rooms, 'sessionRoom' => $sessionRoom]);
     }
 
-    public function update(RoomRequest $request, $id)
+    public function update(SessionRoomRequest $request, $id)
     {
-        $this->roomService->updateRoom($id, $request->all());
+        $inputs = $request->all();
+        $validatedData = $request->validated();
+        if ($validatedData) {
+            $sessionRoom = $this->sessionRoomService->getSessionRoomById($id);
+            $sanitizeRequest = $this->sanitizeRequest($inputs, $sessionRoom->movieImage);
+            $this->sessionRoomService->updateSessionRoom($id, $sanitizeRequest);
 
-        return redirect()->route('rooms')->with('success', 'Sala atualizada com sucesso!');
+            return redirect()->route('sessionRoom')->with('success', 'Sessão da sala atualizada com sucesso!');
+        }
+
+        return redirect()->back()->withErrors($request->errors())->withInput();
     }
 
     public function destroy($id)
     {
-        $this->roomService->destroyRoom($id);
+        $this->sessionRoomService->destroySessionRoom($id);
 
-        return redirect()->route('rooms')->with('success', 'Sala excluída com sucesso!');
+        return redirect()->route('sessionRoom')->with('success', 'Sessão da sala excluída com sucesso!');
+    }
+
+    public function sanitizeRequest(array $inputs, $file): array
+    {
+        $inputs['sessionDate'] = FunctionsHelper::formatDateBrToSql($inputs['sessionDate']);
+        $inputs['priceTicket'] = FunctionsHelper::formatDecimalBrToSql($inputs['priceTicket']);
+
+        if (!is_string($file)) {
+            $imagemRequest = $file;
+            $pastaDestino = 'img/movies/';
+            $nameFile = $imagemRequest->getClientOriginalName();
+            $separaExtensao = explode('.', $nameFile);
+
+            if($separaExtensao[1] !== 'webp'){
+                unset($separaExtensao[1]);
+                array_push($separaExtensao, 'webp');
+                $inputs['movieImage'] = implode('.', $separaExtensao);
+            }else{
+                $inputs['movieImage'] = $nameFile;
+            }
+
+            $novoNome = $pastaDestino . $inputs['movieImage'];
+            $imagem = Image::make($file)->resize(184, 275);
+            $imagem->save($novoNome);
+        }
+
+        if($inputs['status'] === 'Ativo'){
+            $inputs['status'] = 1;
+        }else{
+            $inputs['status'] = 0;
+        }
+
+        return $inputs;
     }
 }

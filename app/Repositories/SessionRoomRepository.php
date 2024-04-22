@@ -22,7 +22,7 @@ class SessionRoomRepository implements SessionRoomRepositoryInterface
      */
     public function getAllSessionRooms()
     {
-        return $this->entity->paginate();
+        return $this->entity->orderBy('id', 'desc')->paginate();
     }
 
     public function getSessionRoomById($id)

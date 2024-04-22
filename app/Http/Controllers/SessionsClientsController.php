@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Room;
+use App\Services\RoomService;
+use App\Http\Requests\SessionRoomRequest;
 use App\Services\SessionClientRoomService;
 use App\Http\Requests\SessionClientRequestRequest;
 use App\Http\Resources\RoomResource;
@@ -31,7 +33,7 @@ class SessionsClientsController extends Controller
         return view('admin.rooms.create', compact('data'));
     }
 
-    public function store(RoomRequest $request)
+    public function store(SessionRoomRequest $request)
     {
         $validatedData = $request->validated();
 
@@ -50,8 +52,9 @@ class SessionsClientsController extends Controller
         return view('admin.rooms.edit', ['room' => $room]);
     }
 
-    public function update(RoomRequest $request, $id)
+    public function update(SessionRoomRequest $request, $id)
     {
+        dd('opa');
         $this->roomService->updateRoom($id, $request->all());
 
         return redirect()->route('rooms')->with('success', 'Sala atualizada com sucesso!');

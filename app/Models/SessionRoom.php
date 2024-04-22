@@ -19,12 +19,13 @@ class SessionRoom extends Model
         'numberSeats',
         'priceTicket',
         'sessionDate',
-        'sessionTime'
+        'sessionTime',
+        'status'
     ];
 
     public function room(): HasOne
     {
-        return $this->hasOne(Room::class);
+        return $this->hasOne(Room::class, 'id', 'roomId');
     }
 
     public function sessionClient(): BelongsTo

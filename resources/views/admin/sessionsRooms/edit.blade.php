@@ -16,29 +16,45 @@
         </ul>
     </div>
     @endif
-    <form action="{{ route('sessionRoomUpdate', ['sessionRoom' => $data['sessionRoom']->id]) }}"
+    <form action="{{ route('sessionRoomUpdate', ['sessionRoom' => $sessionRoom->id]) }}"
         method="post" id="sessionRoomForm">
         @csrf
         @method('PUT')
-        <div class="mb-4">
-            <label for="room" class="block text-gray-700 text-sm font-bold mb-2 text-left">
+        <div class="mb-4 mt-2">
+            <label for="roomDisabled" class="block text-gray-700 text-sm font-bold mb-2 text-left">
                 Escolha a sala
             </label>
-            <div class="relative">
-                <select name="room" id="room" class="validate block appearance-none w-full bg-white border
+            <div class="">
+                <select name="roomDisabled" id="roomDisabled"
+                class="validate block appearance-none w-full bg-white border
                 border-gray-300 text-gray-700 py-2 px-3 pr-8 rounded-lg leading-tight focus:outline-none
-                 focus:border-blue-500">
-                    @foreach ($data['rooms'] as $room)
-                        <option value="{{$room->id}}">{{$room->name}}</option>
+                 focus:border-blue-500" disabled>
+                    @foreach ($rooms as $room)
+                        <option value="{{$room->id}}">
+                            {{$room->name}} - {{$sessionRoom->numberSeats}} assentos disponíveis
+                        </option>
                     @endforeach
                 </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path d="M9 11l5-5-5-5v10zm-3 5h12v-2H6V4H4v14z"/>
-                    </svg>
+            </div>
+        </div>
+        <div class="mb-4 mt-2">
+            <label for="status" class="block text-gray-700 text-sm font-bold mb-2 text-left">
+                Status
+            </label>
+            <div class="relative">
+                <select name="status" id="status" class="block appearance-none w-full bg-white border
+                border-gray-300 text-gray-700 py-2 px-3 pr-8 rounded-lg leading-tight focus:outline-none
+                    focus:border-blue-500">
+                    <option value="Ativo" selected>Sessão Ativa</option>
+                    <option value="Desativo">Sessão Desativada</option>
+                </select>
+                <div class="pointer-events-none absolute bottom-3 right-0 flex items-center px-2 text-gray-700">
+                    <i class="fas fa-sort-down"></i>
                 </div>
             </div>
         </div>
+        <input type="hidden" aria-hidden="true" name="roomId" value="{{$room->id}}">
+        <input type="hidden" aria-hidden="true" name="movieImage" value="{{$sessionRoom->movieImage}}">
         <div class="mb-4">
             <label for="movie" class="block text-gray-700 text-sm font-bold mb-2 text-left">
                 Nome do filme
@@ -47,39 +63,25 @@
             class="validate border rounded-lg px-3 py-2 w-full focus:outline-none focus:border-blue-500">
         </div>
         <div class="mb-4">
-            <label for="numberSeats" class="block text-gray-700 text-sm font-bold mb-2 text-left">
-                Número de assentos
-            </label>
-            <input type="number" id="numberSeats" value="{{$sessionRoom->numberSeats}}" name="numberSeats"
-            class="validate border rounded-lg px-3 py-2 w-full focus:outline-none focus:border-blue-500">
-        </div>
-        <div class="mb-4">
             <label for="priceTicket" class="block text-gray-700 text-sm font-bold mb-2 text-left">
                 Valor do ingresso (R$)
             </label>
-            <input type="text" id="priceTicket" value="{{$sessionRoom->priceTicket}}" name="priceTicket"
-            class="validate border rounded-lg px-3 py-2 w-full focus:outline-none focus:border-blue-500">
+            <input type="text" id="priceTicket" name="priceTicket"
+            value="{{FunctionsHelper::formatDecimalSqlToCurrencyBr($sessionRoom->priceTicket)}}"
+            class="validate border rounded-lg px-3 py-2 w-full focus:outline-none focus:border-blue-500 money">
         </div>
-        <div class="mb-4">
-            <label for="sessionDate" class="block text-gray-700 text-sm font-bold mb-2 text-left">
-                Data
-            </label>
-            <input type="text" value="{{$sessionRoom->sessionDate}}" id="sessionDate" name="sessionDate"
-            class="validate border rounded-lg px-3 py-2 w-full focus:outline-none focus:border-blue-500">
-        </div>
-        <div class="mb-4">
-            <label for="sessionTime" class="block text-gray-700 text-sm font-bold mb-2 text-left">
-                Hora
-            </label>
-            <input type="text" value="{{$sessionRoom->sessionTime}}" id="sessionTime" name="sessionTime"
-            class="validate border rounded-lg px-3 py-2 w-full focus:outline-none focus:border-blue-500">
-        </div>
-        <div class="mb-4">
-            <label for="movieImage" class="block text-gray-700 text-sm font-bold mb-2 text-left">
-                Imagem do filme
-            </label>
-            <input type="file" id="movieImage" name="movieImage"
-            class="validate border rounded-lg px-3 py-2 w-full focus:outline-none focus:border-blue-500">
+        <div class="mb-4 grid grid-cols-1 md:grid-cols-2">
+            <div class="mr-2 mb-2">
+                <label for="sessionDate" class="block text-gray-700 text-sm font-bold mb-2 text-left">Data</label>
+                <input type="text" id="sessionDate" name="sessionDate"
+                value="{{FunctionsHelper::formatDateSqlToBr($sessionRoom->sessionDate)}}"
+                class="validate border rounded-lg px-3 py-2 w-full focus:outline-none focus:border-blue-500 data">
+            </div>
+            <div class="mb-2">
+                <label for="sessionTime" class="block text-gray-700 text-sm font-bold mb-2 text-left">Hora</label>
+                <input type="text" id="sessionTime" name="sessionTime" value="{{$sessionRoom->sessionTime}}"
+                class="validate border rounded-lg px-3 py-2 w-full focus:outline-none focus:border-blue-500 horario">
+            </div>
         </div>
         <div class="flex items-center justify-center">
             <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded
