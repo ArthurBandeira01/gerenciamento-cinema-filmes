@@ -42,9 +42,3 @@ Obs.: Caso a tenant já tenha sido criada na conexão será preciso apagá-la e 
  - [Tailwind](https://tailwindcss.com/)
  - [Tenancy for Laravel](https://tenancyforlaravel.com/)
 
- ### Observações
-
- 1. Neste projeto resolvi não utilizar Docker devido à alguns conflitos encontrados com o pacote multitenancy do laravel, mas é uma alternativa também para rodar em diversos ambientes.  
- 2. Utilizei o PostgreSQL instalado já em minha máquina na versão 16, o PHP na versão 8 e o Laravel na versão 10.
- 3. Para permissão dos usuários foi feita direto no painel as 3 opções de cargos: super_admin, admin(tenant) e usuários(clientes) mas há a alternativa também para utilizar o pacote do [Laravel-permission](https://spatie.be/index.php/docs/laravel-permission/v6/introduction) do Spatie.
- 4. Para autenticação do usuário pode ser utilzizado o scaffolding do Laravel Breeze.

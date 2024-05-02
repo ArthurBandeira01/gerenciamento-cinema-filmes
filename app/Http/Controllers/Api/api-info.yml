@@ -1,0 +1,12 @@
+openapi: 3.0.2
+info:
+  title: API Rest Jetmovie
+  version: 1.0.0
+paths:
+  /:
+    get:
+      summary: Status da API
+      operationId: getStatus
+      responses:
+        '200':
+          description: OK

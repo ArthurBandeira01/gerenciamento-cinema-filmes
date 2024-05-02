@@ -40,11 +40,18 @@ class SessionsRoomsController extends Controller
         $inputs = $request->all();
         $validatedData = $request->validated();
         $sanitizeRequest = $this->sanitizeRequest($inputs, $request->file('movieImage'));
-        $room = $this->roomService->getRoomById($inputs['roomId']);
-        $sanitizeRequest['numberSeats'] = $room->seats;
-        if ($validatedData) {
-            $this->sessionRoomService->makeSessionRoom($sanitizeRequest);
-            return redirect()->route('sessionRoom')->with('success', 'Sessão da sala cadastrada com sucesso!');
+
+        // Verifica se não há sessão na mesma data/horário:
+        $verifyRoomAvailable = $this->sessionRoomService->verifyRoomAvailable($sanitizeRequest['sessionDate'], $sanitizeRequest['sessionTime']);
+        if (!$verifyRoomAvailable) {
+            $room = $this->roomService->getRoomById($inputs['roomId']);
+            $sanitizeRequest['numberSeats'] = $room->seats;
+            if ($validatedData) {
+                $this->sessionRoomService->makeSessionRoom($sanitizeRequest);
+                return redirect()->route('sessionRoom')->with('success', 'Sessão da sala cadastrada com sucesso!');
+            }
+        } else {
+            return redirect()->back()->with('error', 'Sala já possui uma sessão para essa data/hora.');
         }
 
         return redirect()->back()->withErrors($request->errors())->withInput();
@@ -90,11 +97,11 @@ class SessionsRoomsController extends Controller
             $nameFile = $imagemRequest->getClientOriginalName();
             $separaExtensao = explode('.', $nameFile);
 
-            if($separaExtensao[1] !== 'webp'){
-                unset($separaExtensao[1]);
+            if ($separaExtensao[count($separaExtensao) - 1] !== 'webp') {
+                unset($separaExtensao[count($separaExtensao) - 1]);
                 array_push($separaExtensao, 'webp');
                 $inputs['movieImage'] = implode('.', $separaExtensao);
-            }else{
+            } else {
                 $inputs['movieImage'] = $nameFile;
             }
 

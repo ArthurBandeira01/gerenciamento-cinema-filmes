@@ -70,7 +70,7 @@
 <script>
     function listSessionRoom(name, movie) {
         Swal.fire({
-            title: name,
+            title: 'Sala: ' + name,
             text: movie,
             icon: 'info',
             showCancelButton: false,

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\Contracts\SessionRoomRepositoryInterface;
+use App\Models\SessionRoom;
 use Illuminate\Support\Str;
 
 class SessionRoomService
@@ -51,5 +52,15 @@ class SessionRoomService
         $this->sessionRoomRepository->destroySessionRoom($sessionRoom);
 
         return response()->json(['message' => 'Sala de sessão excluída'], 200);
+    }
+
+    //Verifica se já existe sessão ativa na mesma data e horário
+    public function verifyRoomAvailable(string $date, string $time)
+    {
+        $verifyRoomAvailable = SessionRoom::where('sessionDate', $date)
+                                            ->where('sessionTime', $time)
+                                            ->count();
+
+        return ($verifyRoomAvailable > 0) ? true : false;
     }
 }
