@@ -1,3 +1,13 @@
+.body-admin{
+    background-image: url('../../img/site/cinema.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    color: var(--terciary);
+}
+.body-admin {background-color: var(--secondary);}
+
 #sidebar {
     transition: width 0.5s ease;
 }
@@ -19,7 +29,5 @@
 @media screen and (max-width: 992px){
     #sidebar{
         position: absolute;
-        /* width: 0;
-        display: none; */
     }
 }

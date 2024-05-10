@@ -13,20 +13,20 @@ use Illuminate\Support\Facades\DB;
 class SiteController extends Controller
 {
     protected $tenantModel;
+    protected $roomService;
     protected $sessionClientService;
     protected $sessionRoomService;
-    protected $roomService;
 
     public function __construct
     (
         TenantModel $tenantModel,
         RoomService $roomService,
-        SessionClientService $sessionClientService,
-        SessionRoomService $sessionRoomService
+        SessionRoomService $sessionRoomService,
+        SessionClientService $sessionClientService
     ) {
         $this->tenantModel = $tenantModel;
-        $this->sessionRoomService = $sessionRoomService;
         $this->roomService = $roomService;
+        $this->sessionRoomService = $sessionRoomService;
         $this->sessionClientService = $sessionClientService;
     }
 
@@ -36,5 +36,18 @@ class SiteController extends Controller
         $sessionsRooms = $this->sessionRoomService->getAllSessionRooms();
 
         return view('site.index', ['rooms' => $rooms, 'sessionsRooms' => $sessionsRooms]);
+    }
+
+    public function movie($movie)
+    {
+        $sessionRoom = $this->sessionRoomService->getSessionRoomById($movie);
+        $room = $this->roomService->getRoomById($sessionRoom->roomId);
+
+        return view('site.movie', ['sessionRoom' => $sessionRoom, 'room' => $room]);
+    }
+
+    public function selectMovie(Request $request, $movie)
+    {
+        dd('aqui');
     }
 }

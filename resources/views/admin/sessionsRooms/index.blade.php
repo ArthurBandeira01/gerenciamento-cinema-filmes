@@ -13,33 +13,35 @@
         <table class="table-auto mt-8" aria-describedby="Sessões">
             <thead>
                 <tr>
-                    <th class="px-4 py-2" scope="col">ID</th>
-                    <th class="px-4 py-2" scope="col">Filme</th>
-                    <th class="px-4 py-2" scope="col">Ingresso (R$)</th>
-                    <th class="px-4 py-2" scope="col">Assentos</th>
-                    <th class="px-4 py-2" scope="col">Data/Horário</th>
-                    <th class="px-4 py-2" scope="col">Status</th>
-                    <th class="px-4 py-2" scope="col" colspan="3">Ações</th>
+                    <th class="px-2 py-2" scope="col">ID</th>
+                    <th class="px-2 py-2" scope="col">Filme</th>
+                    <th class="px-2 py-2" scope="col">Sala</th>
+                    <th class="px-2 py-2" scope="col">Ingresso (R$)</th>
+                    <th class="px-2 py-2" scope="col">Assentos</th>
+                    <th class="px-2 py-2" scope="col">Data/Horário</th>
+                    <th class="px-2 py-2" scope="col">Status</th>
+                    <th class="px-2 py-2" scope="col" colspan="3">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($sessionsRooms as $sessionRoom)
                     <tr class="divide-x divide-gray-200">
-                        <td class="px-6 py-2">{{ $sessionRoom->id }}</td>
-                        <td class="px-6 py-2">{{ $sessionRoom->movie }}</td>
-                        <td class="px-6 py-2">
+                        <td class="px-2 py-2">{{ $sessionRoom->id }}</td>
+                        <td class="px-2 py-2">{{ $sessionRoom->movie }}</td>
+                        <td class="px-2 py-2">{{ $sessionRoom->room->name }}</td>
+                        <td class="px-2 py-2">
                             {{ FunctionsHelper::formatDecimalSqlToCurrencyBr($sessionRoom->priceTicket) }}
                         </td>
-                        <td class="px-6 py-2">{{ $sessionRoom->numberSeats }}</td>
-                        <td class="px-6 py-2">
+                        <td class="px-2 py-2">{{ $sessionRoom->numberSeats }}</td>
+                        <td class="px-2 py-2">
                             {{ FunctionsHelper::formatDateSqlToBr($sessionRoom->sessionDate) }}
                             {{ FunctionsHelper::timeToBrazil($sessionRoom->sessionTime) }}
                         </td>
                         @if($sessionRoom->status) <td class="px-6 py-2 text-green-500"> On
-                        @else <td class="px-6 py-2 text-red-500"> Off
+                        @else <td class="px-2 py-2 text-red-500"> Off
                         @endif
                         </td>
-                        <td class="flex justify-center px-6 py-2">
+                        <td class="flex justify-center px-2 py-2">
                             <button
                                 onclick="listSessionRoom('{{ $sessionRoom->room->name }}', '{{ $sessionRoom->movie }}')"
                                 class="p-2 rounded bg-yellow-500 hover:bg-yellow-800 text-white

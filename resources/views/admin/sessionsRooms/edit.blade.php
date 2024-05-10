@@ -29,11 +29,9 @@
                 class="validate block appearance-none w-full bg-white border
                 border-gray-300 text-gray-700 py-2 px-3 pr-8 rounded-lg leading-tight focus:outline-none
                  focus:border-blue-500" disabled>
-                    @foreach ($rooms as $room)
-                        <option value="{{$room->id}}">
-                            {{$room->name}} - {{$sessionRoom->numberSeats}} assentos disponíveis
-                        </option>
-                    @endforeach
+                    <option value="{{$room->id}}">
+                        {{$room->name}} - {{$sessionRoom->numberSeats}} assentos disponíveis
+                    </option>
                 </select>
             </div>
         </div>

@@ -4,11 +4,13 @@ namespace App\Providers;
 
 use App\Repositories\Contracts\{
     SessionRoomRepositoryInterface,
+    SessionClientRepositoryInterface,
     RoomRepositoryInterface,
     UserRepositoryInterface
 };
 use App\Repositories\{
     SessionRoomRepository,
+    SessionClientRepository,
     RoomRepository,
     UserRepository
 };
@@ -21,6 +23,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             SessionRoomRepositoryInterface::class,
             SessionRoomRepository::class,
+        );
+
+        $this->app->bind(
+            SessionClientRepositoryInterface::class,
+            SessionClientRepository::class,
         );
 
         $this->app->bind(

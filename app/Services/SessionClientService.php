@@ -14,7 +14,7 @@ class SessionClientService
         $this->sessionClientRepository = $sessionClientRepository;
     }
 
-    public function getAllRooms()
+    public function getAllSessionClient()
     {
         return $this->sessionClientRepository->getAllSessionClients();
     }

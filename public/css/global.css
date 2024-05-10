@@ -10,6 +10,8 @@
     --secondary: #181717;
     --terciary: #ffffff;
     --quartenary: #564d4d;
+    --body-site: #0F172A;
+    --swiper-navigation-size: 30px;
 }
 
 .centraliza{
@@ -24,4 +26,35 @@
     font-size: 14px; /* Tamanho da fonte */
     margin-top: 5px;
     color: rgb(107, 35, 35);
+}
+
+/* Carousel Swipper */
+.swiper {
+    height: 500px;
+    width: 900px;
+}
+
+.swiper-slide {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Altera a cor das setas para vermelho */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    color: #BD1F2A;
+}
+
+/* Responsivo */
+@media screen and (max-width: 768px) {
+    .swiper {
+        height: 300px;
+        width: 500px;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .swiper {width: 350px;}
 }

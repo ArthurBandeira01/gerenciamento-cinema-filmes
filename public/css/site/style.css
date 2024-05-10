@@ -1,5 +1,4 @@
 .body-site{
-    background-color: var(--secondary);
     background-image: url('../../img/site/cinema.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -7,6 +6,7 @@
     height: 100vh;
     color: var(--terciary);
 }
+.body-site{background-color: var(--body-site);}
 
 /* Responsivo */
 @media screen and (max-width: 520px) {

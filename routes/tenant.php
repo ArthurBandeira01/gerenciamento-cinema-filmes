@@ -18,6 +18,8 @@ use Illuminate\Session\Middleware\StartSession;
 Route::middleware(['web', 'global.variables', InitializeTenancyByDomain::class,
 PreventAccessFromCentralDomains::class])->group(function () {
     Route::get('/', [SiteController::class, "index"])->name('index');
+    Route::get('/movie/{movie}', [SiteController::class, "movie"])->name('movie');
+    Route::post('/movie/{movie}', [SiteController::class, "selectMovie"])->name('selectMovie');
     Route::get('/admin', [LoginController::class, 'index'])->name('homeTenant');
     Route::post('/admin', [LoginController::class, 'login'])->name('loginTenant');
     Route::get('/esqueceu-senha', [LoginController::class, "rememberPassword"])->name('rememberPasswordTenant');

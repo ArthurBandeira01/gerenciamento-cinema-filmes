@@ -59,9 +59,10 @@ class SessionsRoomsController extends Controller
 
     public function edit($id)
     {
-        $rooms = $this->roomService->getAllRooms();
         $sessionRoom = $this->sessionRoomService->getSessionRoomById($id);
-        return view('admin.sessionsRooms.edit', ['rooms' => $rooms, 'sessionRoom' => $sessionRoom]);
+        $room = $this->roomService->getRoomById($sessionRoom->roomId);
+
+        return view('admin.sessionsRooms.edit', ['room' => $room, 'sessionRoom' => $sessionRoom]);
     }
 
     public function update(SessionRoomRequest $request, $id)

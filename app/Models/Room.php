@@ -20,4 +20,9 @@ class Room extends Model
     {
         return $this->belongsTo(SessionRoom::class);
     }
+
+    public function sessions()
+    {
+        return $this->hasMany(SessionRoom::class, 'roomId');
+    }
 }
