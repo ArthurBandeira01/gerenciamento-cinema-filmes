@@ -38,4 +38,10 @@ class FunctionsHelper
         return number_format($valor, 2, ',', '.');
     }
 
+    public static function removeMaskCPF($cpf)
+    {
+        $cpf = preg_replace('/[^0-9]/', '', $cpf);
+        return $cpf;
+    }
+
 }

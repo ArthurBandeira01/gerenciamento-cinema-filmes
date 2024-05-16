@@ -26,7 +26,7 @@
             <div class="bg-slate-900 shadow-md rounded-lg px-8 py-6 mx-4">
                 <div class="flex items-center justify-center">
                     @if(isset($tenantVerify)) <a class="text-2xl text-red-500 font-semibold" href="{{route('homeTenant')}}">
-                    @else <a class="text-2xl font-semibold" href="{{route('home')}}">
+                    @else <a class="text-2xl" href="{{route('home')}}">
                     @endif
                         <b>Jet</b>movie
                     </a>

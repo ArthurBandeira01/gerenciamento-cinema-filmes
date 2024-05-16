@@ -171,6 +171,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\TenancyServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
+        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -186,9 +187,11 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'FunctionsHelper' => App\Helpers\FunctionsHelper::class,
+        'SessionClientHelper' => App\Helpers\SessionClientHelper::class,
         'UsersHelper' => App\Helpers\UsersHelper::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
     ])->toArray(),
 
 ];

@@ -9,8 +9,8 @@
             </a>
         </h2>
     </div>
-    <div class="main-content text-center">
-        <table class="table-auto mt-8" aria-describedby="Sessões">
+    <div class="main-content text-center overflow-x-auto">
+        <table class="table table-auto mt-8" aria-describedby="Sessões">
             <thead>
                 <tr>
                     <th class="px-2 py-2" scope="col">ID</th>

@@ -8,7 +8,9 @@ use App\Services\SessionRoomService;
 use App\Services\SessionClientService;
 use Stancl\Tenancy\Database\Models\Tenant;
 use App\Models\Tenant as TenantModel;
+use App\Helpers\FunctionsHelper;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 
 class SiteController extends Controller
 {
@@ -40,14 +42,18 @@ class SiteController extends Controller
 
     public function movie($movie)
     {
+        $movieUrl = URL::route('selectMovie', ['movie' => $movie]);
         $sessionRoom = $this->sessionRoomService->getSessionRoomById($movie);
         $room = $this->roomService->getRoomById($sessionRoom->roomId);
 
-        return view('site.movie', ['sessionRoom' => $sessionRoom, 'room' => $room]);
+        return view('site.movie', ['sessionRoom' => $sessionRoom, 'room' => $room, 'movieUrl' => $movieUrl]);
     }
 
     public function selectMovie(Request $request, $movie)
     {
-        dd('aqui');
+        $inputs = $request->all();
+        $cpf = FunctionsHelper::removeMaskCPF($inputs['cpf']);
+
+        dd($cpf);
     }
 }

@@ -8,7 +8,47 @@
 }
 .body-site{background-color: var(--body-site);}
 
+.img-movie{
+    object-fit: cover;
+    background-repeat: no-repeat;
+}
+
+.box-seat{
+    width: 3.5rem;
+    height: 3.5rem;
+    text-align: center;
+    color: #fff;
+    margin-right: 1rem;
+    margin-top: 1rem;
+    border-radius: 0.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
 /* Responsivo */
+@media screen and (max-width: 992px) {
+    .movie-box{
+        align-items: center;
+    }
+
+    .img-movie{
+        width: 200px;
+        height: 250px;
+        margin-left: 1em;
+    }
+
+    .title-movie{
+        margin-top: 1em;
+    }
+}
+/* @media screen and (max-width: 768px) {
+    .img-movie{
+        width: 400px;
+    }
+} */
+
 @media screen and (max-width: 520px) {
     .password-mobile{
         margin-top: 1em;
