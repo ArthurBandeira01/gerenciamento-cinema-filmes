@@ -1,8 +1,7 @@
 # Sistema de Gestão de Cinemas e Filmes
 
 Este projeto se trata de um sistema para controle de cinemas e filmes, com funcionalidades de gestão de tickets e visualização de filmes disponíveis. Suportando multi-tenancy,
-proporcionará uma experiência aprimorada tanto para administradores de cinema quanto para
-os clientes, oferecendo um painel administrativo central eficiente e uma gestão de assentos
+proporcionará uma experiência aprimorada tanto para administradores de cinema quanto paraos clientes, oferecendo um painel administrativo central eficiente e uma gestão de assentos
 simplificada.
 
 ## Tecnologias utilizadas
@@ -10,6 +9,7 @@ simplificada.
 * Backend: Laravel
 * Frontend: Blade e Vue
 * Banco de dados: PostgreSQL
+
 ## Instalação e Documentação
 
 O projeto de gerenciamento de sistemas utiliza a arquitetura MVC e Repository Pattern seguindo as PSR's do PHP.

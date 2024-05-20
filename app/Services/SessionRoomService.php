@@ -63,4 +63,32 @@ class SessionRoomService
 
         return ($verifyRoomAvailable > 0) ? true : false;
     }
+
+    public function verifyStatusSession(): array
+    {
+        $sessions = $this->sessionRoomRepository->getAllSessionRooms();
+        $sessionsRooms = [];
+
+        foreach ($sessions as $sessionRoom) {
+            if ($sessionRoom->status === true) {
+                $sessionsRooms[] = $sessionRoom;
+            }
+        }
+
+        return $sessionsRooms;
+    }
+
+    public function removeSeatSessionRoom(int $id): void
+    {
+        $sessionRoom = $this->sessionRoomRepository->getSessionRoomById($id);
+        $sessionRoom->numberSeats -= 1;
+        $sessionRoom->save();
+    }
+
+    public function addSeatSessionRoom(int $id): void
+    {
+        $sessionRoom = $this->sessionRoomRepository->getSessionRoomById($id);
+        $sessionRoom->numberSeats += 1;
+        $sessionRoom->save();
+    }
 }

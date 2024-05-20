@@ -8,17 +8,17 @@ use Carbon\Carbon;
 
 class SessionClientHelper
 {
-    public static function verifySeat($id, $number)
+    public static function verifySeat($id, $numberSeat)
     {
-        $verifySeat = SessionClient::where('sessionRoomId', $id)->where('numberSeat', $number)->first();
+        $verifySeat = SessionClient::where('sessionRoomId', $id)->where('numberSeat', $numberSeat)->first();
 
         if ($verifySeat) {
             return  "<div class='box-seat bg-red-700 hover:bg-red-600' onclick='unavailable()'>"
-                        . $number .
+                        . $numberSeat .
                     " </div>";
         } else {
-            return  "<div class='box-seat bg-green-700 hover:bg-green-600' onclick='available($id)'>"
-                        . $number .
+            return  "<div class='box-seat bg-green-700 hover:bg-green-600' onclick='available($id, $numberSeat)'>"
+                        . $numberSeat .
                     " </div>";
         }
 

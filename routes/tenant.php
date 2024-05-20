@@ -20,6 +20,7 @@ PreventAccessFromCentralDomains::class])->group(function () {
     Route::get('/', [SiteController::class, "index"])->name('index');
     Route::get('/movie/{movie}', [SiteController::class, "movie"])->name('movie');
     Route::post('/movie/{movie}', [SiteController::class, "selectMovie"])->name('selectMovie');
+    Route::delete('/movie/cancelar/{movie}', [SiteController::class, "cancelSeat"])->name('cancelSeat');
     Route::get('/admin', [LoginController::class, 'index'])->name('homeTenant');
     Route::post('/admin', [LoginController::class, 'login'])->name('loginTenant');
     Route::get('/esqueceu-senha', [LoginController::class, "rememberPassword"])->name('rememberPasswordTenant');

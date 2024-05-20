@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\Contracts\SessionClientRepositoryInterface;
+use App\Models\SessionClient;
 use Illuminate\Support\Str;
 
 class SessionClientService
@@ -51,5 +52,12 @@ class SessionClientService
         $this->sessionClientRepository->destroySessionClient($sessionClient);
 
         return response()->json(['message' => 'Sessão do cliente removida'], 200);
+    }
+
+    public function verifySeat(string $cpf, int $numberSeat, int $movie)
+    {
+        return SessionClient::where('sessionRoomId', $movie)
+                            ->where('numberSeat', $numberSeat)
+                            ->where('cpf', $cpf)->first();
     }
 }

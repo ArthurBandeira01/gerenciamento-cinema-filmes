@@ -10,24 +10,26 @@
                 <div class="flex swiper swiper-movies">
                     <div class="swiper-wrapper">
                         @foreach ($room->sessions as $session)
-                            <div class="mt-2 mr-4 swiper-slide">
-                                <div class="bg-slate-900 rounded">
-                                    <div class="img-cartaz-box">
-                                        <img class="img-cartaz rounded" src="img/movies/{{$session->movieImage}}" alt="">
-                                    </div>
-                                    <div class="text-center mt-4">
-                                        <span class="text-white">
-                                            {{ FunctionsHelper::formatDateSqlToBr($session->sessionDate) }} -
-                                            {{ FunctionsHelper::timeToBrazil($session->sessionTime) }}
-                                        </span>
-                                    </div>
-                                    <div class="text-center mt-4">
-                                        <a href="{{ route('movie', ['movie' => $session->id]) }}" class="bg-red-500 hover:bg-red-600 text-white p-1 rounded">
-                                            <i class="fas fa-ticket-alt"></i> Comprar ingresso
-                                        </a>
+                            @if($session->status)
+                                <div class="mt-2 mr-4 swiper-slide">
+                                    <div class="bg-slate-900 rounded">
+                                        <div class="img-cartaz-box">
+                                            <img class="img-cartaz rounded" src="img/movies/{{$session->movieImage}}" alt="">
+                                        </div>
+                                        <div class="text-center mt-4">
+                                            <span class="text-white">
+                                                {{ FunctionsHelper::formatDateSqlToBr($session->sessionDate) }} -
+                                                {{ FunctionsHelper::timeToBrazil($session->sessionTime) }}
+                                            </span>
+                                        </div>
+                                        <div class="text-center mt-4">
+                                            <a href="{{ route('movie', ['movie' => $session->id]) }}" class="bg-red-500 hover:bg-red-600 text-white p-1 rounded">
+                                                <i class="fas fa-ticket-alt"></i> Comprar ingresso
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
                         @endforeach
                     </div>
                     <div class="swiper-button-prev"></div>
