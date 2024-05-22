@@ -51,14 +51,14 @@
 
                             <div id="reportListDropdownMenu" class="absolute hidden right-0 mt-2 w-48 bg-gray-950
                             rounded-lg shadow-md z-10 text-left">
-                                <a href="{{route('admin')}}" class="block px-4 py-2 text-white
+                                <a href="{{route('reportByMovie')}}" class="block px-4 py-2 text-white
                                 hover:text-red-500 rounded">
                                     <i class="fas fa-file-alt"></i> Valor arrecadado por filme
                                 </a>
-                                <a href="" class="block px-4 py-2 text-white hover:text-red-500 rounded">
+                                <a href="{{route('reportByMovie')}}" class="block px-4 py-2 text-white hover:text-red-500 rounded">
                                     <i class="fas fa-file-alt"></i> Valor arrecadado por semana
                                 </a>
-                                <a href="" class="block px-4 py-2 text-white hover:text-red-500 rounded">
+                                <a href="{{route('reportByMovie')}}" class="block px-4 py-2 text-white hover:text-red-500 rounded">
                                     <i class="fas fa-file-alt"></i> Mais visualizados
                                 </a>
                             </div>

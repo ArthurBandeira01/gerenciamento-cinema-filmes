@@ -14,20 +14,10 @@ class SessionClientFactory extends Factory
 
     public function definition(): array
     {
-        // Get the next available seat number
-        $nextSeatNumber = $this->getNextSeatNumber();
-
         return [
-            'sessionRoomId' => 9,
+            'sessionRoomId' => 14,
             'cpf' => FunctionsHelper::generateValidCPF(),
-            'numberSeat' => $nextSeatNumber,
+            'numberSeat' => 1,
         ];
-    }
-
-    protected function getNextSeatNumber()
-    {
-        // Get the maximum seat number currently in the database
-        $maxSeatNumber = DB::table('sessions_clients')->max('numberSeat');
-        return $maxSeatNumber ? $maxSeatNumber + 1 : 1;
     }
 }

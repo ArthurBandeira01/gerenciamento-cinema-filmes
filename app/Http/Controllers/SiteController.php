@@ -11,7 +11,6 @@ use Stancl\Tenancy\Database\Models\Tenant;
 use App\Models\Tenant as TenantModel;
 use App\Models\SessionClient;
 use App\Helpers\FunctionsHelper;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use RealRashid\SweetAlert\Facades\Alert;
 

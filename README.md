@@ -29,7 +29,19 @@ Após ter criado a database rodei o comando para migrar um tenant e um usuário 
 ```bash
     php artisan migrate:fresh --seed
 ```
+
+Para rodar as migration no tenant:
+``` php artisan tenants:migrate ```
 Obs.: Caso a tenant já tenha sido criada na conexão será preciso apagá-la e rodar novamente o comando acima.
+
+![Reserva de assento](public/img/site/jetimovie-site.png)
+
+
+![Reserva - gif](public/img/site/jetimovie-admin.png)
+
+![Tela de Login](public/img/site/jetimovie-login.png)
+
+![Painel](public/img/site/jetimovie-admin.png)
 
 ## Referências das tecnologias usadas
 

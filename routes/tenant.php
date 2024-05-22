@@ -8,6 +8,7 @@ use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RoomsController;
+use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\SessionsRoomsController;
 use App\Http\Controllers\SessionsClientsController;
 use App\Http\Controllers\SiteController;
@@ -74,5 +75,10 @@ Route::middleware(['web', 'userAccessTenant', 'global.variables',
         ->name('sessionClientUpdate');
         Route::delete('cliente-de-sessao/{sessionRoom}', [SessionsClientsController::class, "destroy"])
         ->name('sessionClientDestroy');
+
+        //Relatórios:
+        Route::get('relatorios/arrecadado-por-filme', [ReportsController::class, "reportByMovie"])->name('reportByMovie');
+        Route::get('relatorios/arrecadado-por-semana', [ReportsController::class, "reportByWeek"])->name('reportByWeek');
+        Route::get('relatorios/mais-visualizados', [ReportsController::class, "reportMoreViewed"])->name('reportMoreViewed');
     });
 });
