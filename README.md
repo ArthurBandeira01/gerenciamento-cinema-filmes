@@ -36,7 +36,7 @@ Obs.: Caso a tenant já tenha sido criada na conexão será preciso apagá-la e 
 
 ![Reserva de assento](public/img/site/jetimovie-site.png)
 
-![Reserva - gif](public/gif/site/jetimovie-site.gif)
+![Reserva - gif](public/gif/jetimovie-site.gif)
 
 ![Tela de Login](public/img/site/jetimovie-login.png)
 
